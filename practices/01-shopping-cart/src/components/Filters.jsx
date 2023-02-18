@@ -7,7 +7,7 @@ export function Filters ({ onChange }) {
   const minPriceFilterId = useId()
   const categoryFilterId = useId()
 
-  console.log({ minPriceFilterId, categoryFilterId })
+  // console.log({ minPriceFilterId, categoryFilterId })
 
   const handleChangeMinPrice = event => {
     // [BAD] DOS FUENTES DE LA VERDAD
