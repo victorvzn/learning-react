@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "workspaces": [
+    "practices/*",
     "projects/*"
   ],
   "scripts": {
