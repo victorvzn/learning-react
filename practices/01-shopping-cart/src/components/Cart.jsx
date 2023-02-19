@@ -10,10 +10,18 @@ export function Cart () {
   const cartCheckboxId = useId()
   const { cart, clearCart, addToCart } = useCart()
 
+  const lengthCart = cart.length
+  const hasCartProducts = lengthCart > 0
+
   return (
     <>
       <label className='cart-button' htmlFor={cartCheckboxId}>
         <CartIcon />
+        {
+          hasCartProducts
+            ? <span>{lengthCart}</span>
+            : null
+        }
       </label>
 
       <input id={cartCheckboxId} type='checkbox' hidden />

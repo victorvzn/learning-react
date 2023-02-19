@@ -46,6 +46,21 @@
   z-index: 9999;
 }
 
+.cart-button span {
+  position: absolute;
+  top: -4px;
+  left: -14px;
+  background: #D00;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: .8rem;
+  font-weight: bold;
+}
+
 .cart-button:hover {
   scale: 1.1;
 }
