@@ -1,0 +1,15 @@
+.page {
+  display: grid;
+  place-items: center;
+}
+
+.header {
+  display: grid;
+  place-items: center;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
