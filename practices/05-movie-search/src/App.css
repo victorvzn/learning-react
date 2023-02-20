@@ -1,8 +1,4 @@
-.page {
-  display: grid;
-  place-items: center;
-}
-
+.page,
 .header {
   display: grid;
   place-items: center;
