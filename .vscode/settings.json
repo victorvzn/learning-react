@@ -1,0 +1,8 @@
+// https://www.digitalocean.com/community/tutorials/workflow-auto-eslinting
+
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "eslint.validate": ["javascript"]
+}
