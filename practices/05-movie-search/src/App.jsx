@@ -55,7 +55,10 @@ function App () {
   }
 
   const handleChange = (event) => {
-    setSearch(event.target.value)
+    const newSearch = event.target.value
+    setSearch(newSearch)
+    searchMovies({ search: newSearch })
+    // setSearch(event.target.value)
   }
 
   const handleSort = () => {
