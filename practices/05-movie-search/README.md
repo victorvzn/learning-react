@@ -2,6 +2,8 @@
 
 Crea una aplicación para buscar películas
 
+![Movie Search](./screen.png "Movie Search screenshot")
+
 API a usar: - https://www.omdbapi.com/
 
 Consigue la `API Key` en la propia página web registrando tu email.
