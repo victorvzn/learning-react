@@ -40,9 +40,11 @@ function useSearch () { // Extraemos la lógica el componente
 }
 
 function App () {
+  const [sort, setSort] = useState(false)
+
   const { search, setSearch, error } = useSearch()
 
-  const { movies, searchMovies, loading } = useMovies({ search })
+  const { movies, searchMovies, loading } = useMovies({ search, sort })
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -54,6 +56,10 @@ function App () {
 
   const handleChange = (event) => {
     setSearch(event.target.value)
+  }
+
+  const handleSort = () => {
+    setSort(!sort)
   }
 
   // const counter = useRef(0)
@@ -73,6 +79,7 @@ function App () {
             name='query'
             placeholder='Avengers, Star Wars, Free Guy...'
           />
+          <input type='checkbox' onChange={handleSort} checked={sort} />
           <button type='submit'>Search</button>
         </form>
 
