@@ -9,11 +9,10 @@ import { useMovies } from './hooks/useMovies'
 function useSearch () { // Extraemos la lógica el componente
   const [search, setSearch] = useState('')
   const [error, setError] = useState(null)
+
   const isFirstInput = useRef(true)
 
   useEffect(() => {
-    console.log(search.length)
-
     if (isFirstInput.current) {
       isFirstInput.current = search === ''
       return
@@ -41,12 +40,13 @@ function useSearch () { // Extraemos la lógica el componente
 }
 
 function App () {
-  const { movies } = useMovies()
-
   const { search, setSearch, error } = useSearch()
+
+  const { movies, searchMovies, loading } = useMovies({ search })
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    searchMovies()
     // const { query } = Object.fromEntries(
     //   new window.FormData(event.target)
     // )
@@ -80,7 +80,11 @@ function App () {
       </header>
 
       <main className='main'>
-        <Movies movies={movies} />
+        {
+          loading
+            ? <p>Loading...</p>
+            : <Movies movies={movies} />
+        }
       </main>
     </div>
   )
