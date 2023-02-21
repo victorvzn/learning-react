@@ -48,7 +48,7 @@ function App () {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    searchMovies()
+    searchMovies({ search })
     // const { query } = Object.fromEntries(
     //   new window.FormData(event.target)
     // )
@@ -61,6 +61,10 @@ function App () {
   const handleSort = () => {
     setSort(!sort)
   }
+
+  useEffect(() => {
+    console.log('new getMovies received')
+  }, [searchMovies])
 
   // const counter = useRef(0)
   // counter.counter++
