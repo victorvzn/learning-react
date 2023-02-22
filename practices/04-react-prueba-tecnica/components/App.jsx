@@ -10,12 +10,24 @@ const CAT_PREFIX_IMAGE_URL = 'https://cataas.com'
 export function App () {
   const [fact, setFact] = useState('lorem ipsum cat fact whatever')
   const [imageUrl, setImageUrl] = useState('')
+  // const [factError, setFactError] = useState('')
 
   // Para recuperar la cita al cargar la página
   useEffect(() => {
     fetch(CAT_ENDPOINT_RANDOM_FACT)
-      .then(res => res.json())
+      .then(res => {
+        // TODO: Handle error if !res.ok
+        // if (!res.ok) setFactError('No se ha podido recuperar la cita') }
+        // if (!res.ok) throw new Error('Error fetching fact') }
+
+        return res.json()
+      })
       .then(({ fact }) => setFact(fact))
+      .catch((err) => {
+        console.log(err)
+        // tanto si hay error con la respuesta
+        // como si hay un error con la petición
+      })
   }, [])
 
   // Para recuperar la imagen cada vez que tenemos una cita nueva
