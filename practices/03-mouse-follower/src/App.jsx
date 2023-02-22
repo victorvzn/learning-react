@@ -17,8 +17,20 @@ function useFolloMouse () {
       window.addEventListener('pointermove', handleMove)
     }
 
-    return () => {
+    // cleanup
+    // --> cuando el componente se desmonta
+    // --> cuando cambian las dependencias antes de ejecutar el efecto de nuevo
+    return () => { // cleanup method
+      console.log('cleanup') // Esta línea se ejecuta antes de desmontar el componente o antes de ejecutar el componente
       window.removeEventListener('pointermove', handleMove)
+    }
+  }, [enabled])
+
+  useEffect(() => {
+    document.body.classList.toggle('no-cursor', enabled)
+
+    return () => { // cleanup method
+      document.body.classList.remove('no-cursor')
     }
   }, [enabled])
 
