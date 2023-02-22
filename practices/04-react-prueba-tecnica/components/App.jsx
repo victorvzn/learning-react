@@ -1,43 +1,32 @@
 import './App.css'
 
 import { useEffect, useState } from 'react'
+import { getRandomFact } from '../src/services/facts'
 
-const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact'
-// const CAT_ENDPOINT_IMAGE_URL = `https://cataas.com/cat/says/${firstWord}?size=50&color=red&json=true`
+import { useCatImage } from '../src/hooks/useCatImage'
 
 const CAT_PREFIX_IMAGE_URL = 'https://cataas.com'
 
-export function App () {
-  const [fact, setFact] = useState('lorem ipsum cat fact whatever')
-  const [imageUrl, setImageUrl] = useState('')
+const useCatFact = () => {
+  const [fact, setFact] = useState()
+
+  const refreshRandomFact = () => {
+    getRandomFact().then(newFact => setFact(newFact))
+  }
 
   // Para recuperar la cita al cargar la página
-  useEffect(() => {
-    fetch(CAT_ENDPOINT_RANDOM_FACT)
-      .then(res => res.json())
-      .then(({ fact }) => setFact(fact))
-  }, [])
+  useEffect(refreshRandomFact, [])
 
-  // Para recuperar la imagen cada vez que tenemos una cita nueva
-  useEffect(() => {
-    if (!fact) return
+  return { fact, refreshRandomFact }
+}
 
-    const twoFirstWords = fact.split(' ', 2).join(' ')
+export function App () {
+  const { fact, refreshRandomFact } = useCatFact()
 
-    console.log(twoFirstWords)
+  const { imageUrl } = useCatImage({ fact })
 
-    fetch(`https://cataas.com/cat/says/${twoFirstWords}?size=50&color=red&json=true`)
-      .then(res => res.json())
-      .then(data => {
-        const { url } = data
-        setImageUrl(url)
-      })
-  }, [fact])
-
-  const handleClick = () => {
-    fetch(CAT_ENDPOINT_RANDOM_FACT)
-      .then(res => res.json())
-      .then(({ fact }) => setFact(fact))
+  const handleClick = async () => {
+    refreshRandomFact()
   }
 
   return (
