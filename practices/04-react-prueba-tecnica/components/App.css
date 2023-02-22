@@ -1,0 +1,9 @@
+main {
+  display: grid;
+  place-items: center;
+}
+
+main img {
+  max-width: 320px;
+  height: auto;
+}
