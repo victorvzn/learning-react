@@ -6,13 +6,26 @@ import { TURNS } from './constants'
 import { WinnerModal } from './components/WinnerModal'
 import { GameBoard } from './components/GameBoard'
 import { Turn } from './components/Turn'
+import { saveGameToStorage, resetGameToStorage } from './storage'
 
 function App () {
-  const [board, setBoard] = useState(
-    Array(9).fill(null)
-  )
+  const [board, setBoard] = useState(() => {
+    const boardFromStorage = window.localStorage.getItem('board')
+    if (boardFromStorage) return JSON.parse(boardFromStorage)
+    return Array(9).fill(null)
+  })
 
-  const [turn, setTurn] = useState(TURNS.X)
+  const [turn, setTurn] = useState(() => {
+    const turnFromStorage = window.localStorage.getItem('turn')
+    return turnFromStorage ?? TURNS.X // ?? -> Nullish Coalescing Operator
+
+    /*
+      ?? -> toma el valor derecho si el lado derecho es null o undefined, sino toma el lado izquierdo
+      || -> Or
+      && -> And
+
+    */
+  })
 
   // null es que no hay ganador, false es que hay un empate
   const [winner, setWinner] = useState(null)
@@ -30,6 +43,11 @@ function App () {
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
 
+    saveGameToStorage({
+      bord: newBoard,
+      turn: newTurn
+    })
+
     // verificar si hay ganador
     const newWinner = checkWinnerFrom(newBoard)
 
@@ -45,6 +63,8 @@ function App () {
     setBoard(Array(9).fill(null))
     setTurn(TURNS.X)
     setWinner(null)
+
+    resetGameToStorage()
   }
 
   return (
