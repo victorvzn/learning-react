@@ -1,34 +1,11 @@
 import { useState } from 'react'
+import confetti from 'canvas-confetti'
 
-const TURNS = {
-  X: 'x',
-  O: 'o'
-}
-
-const Square = ({ children, isSelected, updateBoard, index }) => {
-  const className = `square ${isSelected ? 'is-selected' : null}`
-
-  const handleClick = () => {
-    updateBoard()
-  }
-
-  return (
-    <div className={className} onClick={handleClick}>
-      {children}
-    </div>
-  )
-}
-
-const WINNER_COMBOS = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6]
-]
+import { checkEndGame, checkWinnerFrom } from './logic/board'
+import { TURNS } from './constants'
+import { WinnerModal } from './components/WinnerModal'
+import { GameBoard } from './components/GameBoard'
+import { Turn } from './components/Turn'
 
 function App () {
   const [board, setBoard] = useState(
@@ -39,19 +16,6 @@ function App () {
 
   // null es que no hay ganador, false es que hay un empate
   const [winner, setWinner] = useState(null)
-
-  const checkWinner = (boardToCheck) => {
-    for (const combo of WINNER_COMBOS) {
-      const [a, b, c] = combo
-      if (
-        boardToCheck[a] && // 0 -> x u o
-        boardToCheck[a] === boardToCheck[b] &&
-        boardToCheck[a] === boardToCheck[c]
-      ) {
-        return boardToCheck[a]
-      }
-    }
-  }
 
   const handleUpdateBoard = (index) => {
     // No actualizamos esta posición si ya tiene algo
@@ -67,41 +31,36 @@ function App () {
     setTurn(newTurn)
 
     // verificar si hay ganador
-    const newWinner = checkWinner(newBoard)
+    const newWinner = checkWinnerFrom(newBoard)
 
     if (newWinner) {
+      confetti({ shapes: ['star'] })
       setWinner(newWinner)
+    } else if (checkEndGame(newBoard)) {
+      setWinner(false)
     }
+  }
+
+  const resetGame = () => {
+    setBoard(Array(9).fill(null))
+    setTurn(TURNS.X)
+    setWinner(null)
   }
 
   return (
     <main className='board'>
       <h1>Tic tac toe</h1>
 
-      <section className='game'>
-        {
-          board.map((_, index) => {
-            return (
-              <Square
-                key={index}
-                index={index}
-                updateBoard={() => handleUpdateBoard(index)}
-              >
-                {board[index]}
-              </Square>
-            )
-          })
-        }
-      </section>
+      <button onClick={resetGame}>Reset de juego</button>
 
-      <section className='turn'>
-        <Square isSelected={turn === TURNS.X}>
-          {TURNS.X}
-        </Square>
-        <Square isSelected={turn === TURNS.O}>
-          {TURNS.O}
-        </Square>
-      </section>
+      <GameBoard
+        board={board}
+        handleUpdateBoard={handleUpdateBoard}
+      />
+
+      <Turn turn={turn} />
+
+      <WinnerModal winner={winner} resetGame={resetGame} />
     </main>
   )
 }
