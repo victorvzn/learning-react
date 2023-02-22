@@ -11,25 +11,28 @@ export function App () {
   const [fact, setFact] = useState('lorem ipsum cat fact whatever')
   const [imageUrl, setImageUrl] = useState('')
 
+  // Para recuperar la cita al cargar la página
   useEffect(() => {
     fetch(CAT_ENDPOINT_RANDOM_FACT)
       .then(res => res.json())
-      .then(data => {
-        const { fact } = data
-        setFact(fact)
-
-        const twoFirstWords = fact.split(' ', 2).join(' ')
-
-        console.log(twoFirstWords)
-
-        fetch(`https://cataas.com/cat/says/${twoFirstWords}?size=50&color=red&json=true`)
-          .then(res => res.json())
-          .then(data => {
-            const { url } = data
-            setImageUrl(url)
-          })
-      })
+      .then(({ fact }) => setFact(fact))
   }, [])
+
+  // Para recuperar la imagen cada vez que tenemos una cita nueva
+  useEffect(() => {
+    if (!fact) return
+
+    const twoFirstWords = fact.split(' ', 2).join(' ')
+
+    console.log(twoFirstWords)
+
+    fetch(`https://cataas.com/cat/says/${twoFirstWords}?size=50&color=red&json=true`)
+      .then(res => res.json())
+      .then(data => {
+        const { url } = data
+        setImageUrl(url)
+      })
+  }, [fact])
 
   return (
     <main>
