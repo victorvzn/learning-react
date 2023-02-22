@@ -34,9 +34,17 @@ export function App () {
       })
   }, [fact])
 
+  const handleClick = () => {
+    fetch(CAT_ENDPOINT_RANDOM_FACT)
+      .then(res => res.json())
+      .then(({ fact }) => setFact(fact))
+  }
+
   return (
     <main>
       <h1>App de gatitos!</h1>
+
+      <button onClick={handleClick}>Get new fact</button>
 
       {fact && <p>{fact}</p>}
 
