@@ -1,3 +1,4 @@
 packages:
   - 'practices/*'
+  - 'challenges/*'
   - 'projects/*'

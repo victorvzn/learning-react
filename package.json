@@ -5,6 +5,7 @@
   "main": "index.js",
   "workspaces": [
     "practices/*",
+    "challenges/*",
     "projects/*"
   ],
   "scripts": {
