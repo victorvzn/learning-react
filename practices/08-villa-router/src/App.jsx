@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
-const NAVIGATION_EVENT = 'pushstate'
+import { EVENTS } from './constants'
 
 function navigate (href) {
   // 1. Con el objeto History, cambiamos la url, usando el método pushState().
@@ -10,7 +10,7 @@ function navigate (href) {
   window.history.pushState({}, '', href)
   // 2. Crear un evento personalizado, para qvisar que hemos cambiado de url
   // IMPORTANT: No hay una forma de escruchar el evento pushstate
-  const navigationEvent = new Event(NAVIGATION_EVENT)
+  const navigationEvent = new Event(EVENTS.PUSHSTATE)
   // 3. Enviamos el evento a quien lo quiera escucahr
   window.dispatchEvent(navigationEvent)
 }
@@ -62,10 +62,12 @@ function App () {
       setCurrentPath(window.location.pathname)
     }
 
-    window.addEventListener(NAVIGATION_EVENT, onLocationChange)
+    window.addEventListener(EVENTS.PUSHSTATE, onLocationChange)
+    window.addEventListener(EVENTS.POPSTATE, onLocationChange)
 
     return () => {
-      window.removeEventListener(NAVIGATION_EVENT, onLocationChange)
+      window.removeEventListener(EVENTS.PUSHSTATE, onLocationChange)
+      window.removeEventListener(EVENTS.POPSTATE, onLocationChange)
     }
   }, [])
 
