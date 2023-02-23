@@ -5,6 +5,8 @@ import { Router } from './Router'
 import { AboutPage } from './pages/About'
 import { HomePage } from './pages/Home'
 
+import Page404 from './pages/404'
+
 const appRoutes = [
   {
     path: '/',
@@ -23,7 +25,7 @@ const appRoutes = [
 function App () {
   return (
     <main>
-      <Router routes={appRoutes} />
+      <Router routes={appRoutes} defaultComponent={Page404} />
     </main>
   )
 }
