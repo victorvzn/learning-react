@@ -1,5 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
+
+const NAVIGATION_EVENT = 'pushstate'
+
+function navigate (href) {
+  // 1. Con el objeto History, cambiamos la url, usando el método pushState().
+  // pero sin refrescar la página, solo que refleje el cambio en la url.
+  // Parámetros: data, unused, url
+  window.history.pushState({}, '', href)
+  // 2. Crear un evento personalizado, para qvisar que hemos cambiado de url
+  // IMPORTANT: No hay una forma de escruchar el evento pushstate
+  const navigationEvent = new Event(NAVIGATION_EVENT)
+  // 3. Enviamos el evento a quien lo quiera escucahr
+  window.dispatchEvent(navigationEvent)
+}
 
 function HomePage () {
   return (
@@ -10,7 +24,7 @@ function HomePage () {
           Esta es un página de ejemplo para crear un React Router desde cero
         </p>
       </div>
-      <a href='/about'>Ir al nosotros</a>
+      <button onClick={() => navigate('/about')}>Ir al nosotros</button>
     </>
   )
 }
@@ -27,19 +41,33 @@ function AboutPage () {
           height={200}
         />
         <p>
-          ¡Hola! Me llamo Victor Villazón y estoy creando un clon de React Router hecho en un directo por midudev.
+          ¡Hola! Me llamo <a href='https://victorvillazon.com' target='_blank' rel='noreferrer'>Victor Villazón</a> y estoy creando un clon de React Router hecho en un directo por midudev.
         </p>
         <p>
           Visita su <a href='https://github.com/midudev/aprendiendo-react'>repositorio original</a> para ver el midu-router.
         </p>
       </div>
-      <a href='/'>Ir al home</a>
+      <button onClick={() => navigate('/')}>Ir al home</button>
     </>
   )
 }
 
 function App () {
   const [currentPath, setCurrentPath] = useState(window.location.pathname)
+
+  useEffect(() => {
+    // NOTE: Es necesario crear esta función para usarla tanto
+    // al crear el envento como cuando lo removemos
+    const onLocationChange = () => {
+      setCurrentPath(window.location.pathname)
+    }
+
+    window.addEventListener(NAVIGATION_EVENT, onLocationChange)
+
+    return () => {
+      window.removeEventListener(NAVIGATION_EVENT, onLocationChange)
+    }
+  }, [])
 
   return (
     <main>
