@@ -12,7 +12,7 @@ export function navigate (href) {
   window.dispatchEvent(navigationEvent)
 }
 
-export function Link ({ target, to, ...props }) {
+export function Link ({ scrollReset = true, target, to, ...props }) {
   const handleClick = (event) => {
     // event.preventDefault()
     const isMainEvent = event.button === BUTTONS.primary // Primary click
@@ -22,6 +22,8 @@ export function Link ({ target, to, ...props }) {
     if (isMainEvent && isManageableEvent && !isModifiedEvent) {
       event.preventDefault()
       navigate(to) // Navegación con SPA
+
+      scrollReset && window.scrollTo(0, 0)
     }
   }
 
