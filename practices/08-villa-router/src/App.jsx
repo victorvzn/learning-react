@@ -4,6 +4,7 @@ import { Router } from './Router'
 
 import { AboutPage } from './pages/About'
 import { HomePage } from './pages/Home'
+import { SearchPage } from './pages/SearchPage'
 
 import Page404 from './pages/404'
 
@@ -17,8 +18,8 @@ const appRoutes = [
     Component: AboutPage
   },
   {
-    path: '/twitch',
-    Component: () => <h1>My Twitch</h1>
+    path: '/search/:query', // --> /search/javascript or /search/python or /search/react
+    Component: SearchPage
   }
 ]
 
