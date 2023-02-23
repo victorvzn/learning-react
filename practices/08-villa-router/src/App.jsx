@@ -1,13 +1,17 @@
+import { lazy, Suspense } from 'react'
+
 import './App.css'
 
 import { Router } from './Router'
 import { Route } from './Route'
 
-import { AboutPage } from './pages/About'
-import { HomePage } from './pages/Home'
-import { SearchPage } from './pages/SearchPage'
+import Page404 from './pages/404'// Import estático
+import { SearchPage } from './pages/SearchPage' // Import estático
 
-import Page404 from './pages/404'
+// import('./pages/Home') // Import dinámico
+
+const LazyHomePage = lazy(() => import('./pages/Home.jsx')) // <---- Lazy Loading
+const LazyAboutPage = lazy(() => import('./pages/About.jsx')) // <---- Lazy Loading
 
 const appRoutes = [
   {
@@ -19,10 +23,12 @@ const appRoutes = [
 function App () {
   return (
     <main>
-      <Router routes={appRoutes} defaultComponent={Page404}>
-        <Route path='/' Component={HomePage} />
-        <Route path='/about' Component={AboutPage} />
-      </Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Router routes={appRoutes} defaultComponent={Page404}>
+          <Route path='/' Component={LazyHomePage} />
+          <Route path='/about' Component={LazyAboutPage} />
+        </Router>
+      </Suspense>
     </main>
   )
 }

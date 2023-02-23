@@ -11,9 +11,7 @@ export function Router ({ children, routes = [], defaultComponent: DefaultCompon
   useEffect(() => {
     // NOTE: Es necesario crear esta función para usarla tanto
     // al crear el envento como cuando lo removemos
-    const onLocationChange = () => {
-      setCurrentPath(window.location.pathname)
-    }
+    const onLocationChange = () => setCurrentPath(window.location.pathname)
 
     window.addEventListener(EVENTS.PUSHSTATE, onLocationChange)
     window.addEventListener(EVENTS.POPSTATE, onLocationChange)

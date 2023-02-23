@@ -1,6 +1,8 @@
 import { Link } from '../Link'
 
-export function AboutPage () {
+console.log('Estamos importando el archivo About.jsx desde el Home.jsx y no es necesario --> Solución: Lazy load')
+
+export default function AboutPage () {
   return (
     <>
       <h1>About</h1>
