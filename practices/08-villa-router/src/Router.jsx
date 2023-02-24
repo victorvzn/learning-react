@@ -2,16 +2,17 @@ import { useEffect, useState, Children } from 'react'
 import { EVENTS } from './constants'
 
 import { match } from 'path-to-regexp'
+import { getCurrentPath } from './utils'
 
 export function Router ({ children, routes = [], defaultComponent: DefaultComponent = () => <h1>404</h1> }) {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+  const [currentPath, setCurrentPath] = useState(getCurrentPath)
 
   // console.log(children)
 
   useEffect(() => {
     // NOTE: Es necesario crear esta función para usarla tanto
     // al crear el envento como cuando lo removemos
-    const onLocationChange = () => setCurrentPath(window.location.pathname)
+    const onLocationChange = () => setCurrentPath(getCurrentPath)
 
     window.addEventListener(EVENTS.PUSHSTATE, onLocationChange)
     window.addEventListener(EVENTS.POPSTATE, onLocationChange)
@@ -31,7 +32,7 @@ export function Router ({ children, routes = [], defaultComponent: DefaultCompon
     return isRoute ? props : null
   })
 
-  const routesToUse = routes.concat(routesFromChildren)
+  const routesToUse = routes.concat(routesFromChildren).filter(Boolean)
 
   const Page = routesToUse.find(({ path }) => {
     if (path === currentPath) return true
