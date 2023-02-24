@@ -14,6 +14,7 @@ export default function HomePage () {
         <ul>
           <li><Link to='/not-found-page'>Not found page 404</Link></li>
           <li><Link to='/search/javascript'>Con parámetros: /search/javascript</Link></li>
+          <li><Link to='/search/javascript?limit=223344'>Con query params: /search/javascript?limit=223344</Link></li>
           <li><Link to='/en/about'>About us page in English</Link></li>
         </ul>
       </div>
