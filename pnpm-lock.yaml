@@ -112,7 +112,7 @@ importers:
       '@vitejs/plugin-react-swc': 3.1.0_vite@4.1.2
       vite: 4.1.2
 
-  practices/08-villa-router:
+  practices/07-villa-router:
     specifiers:
       '@testing-library/react': 14.0.0
       '@types/react': 18.0.28
