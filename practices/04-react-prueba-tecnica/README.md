@@ -10,6 +10,6 @@ APIs:
 - [x] Recupera un hecho aleatorio de gatos de la primera API
 - [x] Recuperar la primera palabra del hecho
 - [x] Muestra una imagen de un gato con la primera palabra.
-- [ ] ¿Qué más harías?
+- [ ] ¿Qué más harías? --> Testing, 
 
 **Source:** [midudev/aprendiendo-react](https://github.com/midudev/aprendiendo-react)
