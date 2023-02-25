@@ -13,6 +13,6 @@
   </main>
   
   <footer class="flex justify-center items-center gap-x-2 font-semi pt-10">
-    Hecho con <a href="https://cloudinary.com" target="_blank" rel="noreferrer"><CloudinaryLogo /></a>
+    Hecho con <a href="https://cloudinary.com" target="_blank" rel="noreferrer"><CloudinaryLogo /></a> and <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
   </footer>
 </div>
