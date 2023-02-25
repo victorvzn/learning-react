@@ -1,6 +1,7 @@
 import './App.css'
 
 import { useEffect, useState } from 'react'
+import { Pokemon } from './Pokemon'
 
 export default function App () {
   const [pokemons, setPokemons] = useState()
@@ -24,21 +25,6 @@ export default function App () {
     setUrl(pokemons.next)
   }
 
-  const handleClick = (url) => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-        const sprites = Object.entries(json.sprites)
-        const spritesString = sprites.filter((sprite) => {
-          return sprite[1] !== null && typeof sprite[1] !== 'object'
-        })
-        const spritesMapped = spritesString.map((sprite) => sprite[1])
-        const spritesMappedLen = spritesMapped.length
-        const randomIndex = () => Math.random() + spritesMappedLen
-        console.log(randomIndex())
-      })
-  }
-
   return (
     <div className='App'>
       <header>
@@ -49,9 +35,11 @@ export default function App () {
         {pokemons &&
           pokemons.results.map((pokemon) => {
             return (
-              <div key={pokemon.url} className='pokemon' onClick={() => handleClick(pokemon.url)}>
-                {pokemon.name}
-              </div>
+              <Pokemon
+                key={pokemon.url}
+                url={pokemon.url}
+                name={pokemon.name}
+              />
             )
           })}
       </main>

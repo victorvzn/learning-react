@@ -10,10 +10,13 @@ h1 {
 
 .pokemon {
   background: #dea;
-  height: 25px;
+  height: 100px;
   color: #333;
   text-align: center;
   text-transform: capitalize;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
 }
 
 .footer {
