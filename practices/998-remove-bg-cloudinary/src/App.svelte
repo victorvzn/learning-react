@@ -1,7 +1,12 @@
 <script lang="ts">
   import svelteLogo from './assets/svelte.svg'
   import CloudinaryLogo from './CloudinaryLogo.svelte'
-    import StepUpload from './StepUpload.svelte';
+
+  import { ImageStatus } from '../types.d';
+  import { imageStatus } from './store';
+  
+  import StepUpload from './StepUpload.svelte';
+  import StepEdit from './StepEdit.svelte';
 </script>
 
 <div class="max-w-xl m-auto grid grid-cols-1 place-content-center w-full h-screen p-4">
@@ -10,10 +15,14 @@
   </header>
 
   <main>
-    <StepUpload />
+    {#if $imageStatus === ImageStatus.READY || $imageStatus === ImageStatus.UPLOADING}
+      <StepUpload />
+    {:else if $imageStatus === ImageStatus.DONE}
+      <StepEdit />
+    {/if}
   </main>
   
   <footer class="flex justify-center items-center gap-x-2 font-semibold pt-10">
-    Hecho con <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" /> and <a href="https://cloudinary.com" target="_blank" rel="noreferrer"><CloudinaryLogo /></a>
+    Hecho con <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" /> y <a href="https://cloudinary.com" target="_blank" rel="noreferrer"><CloudinaryLogo /></a>
   </footer>
 </div>
