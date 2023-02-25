@@ -154,6 +154,7 @@ importers:
       autoprefixer: ^10.4.7
       postcss: ^8.4.14
       postcss-load-config: ^4.0.1
+      standard: ^17.0.0
       svelte: ^3.55.1
       svelte-check: ^2.10.3
       svelte-preprocess: ^4.10.7
@@ -161,6 +162,8 @@ importers:
       tslib: ^2.5.0
       typescript: ^4.9.3
       vite: ^4.1.0
+    dependencies:
+      standard: 17.0.0
     devDependencies:
       '@sveltejs/vite-plugin-svelte': 2.0.3_svelte@3.55.1+vite@4.1.4
       '@tsconfig/svelte': 3.0.0
