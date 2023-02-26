@@ -1,7 +1,7 @@
 function App () {
   return (
     <div>
-      <h1>Aprender TDD</h1>
+      <h1>Aprende TDD + vitest</h1>
     </div>
   )
 }
