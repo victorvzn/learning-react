@@ -14,6 +14,8 @@ export const operations = ['+', '-', '*', '/']
 
 export const equalSign = '='
 
+export const clearButton = 'C'
+
 export const Calculator = () => {
   const [value, setValue] = useState('')
 
@@ -22,8 +24,12 @@ export const Calculator = () => {
   }
 
   const handelEvaluate = () => {
-    const newValue = evaluate(value)
+    const newValue = String(evaluate(value))
     setValue(newValue)
+  }
+
+  const handleClear = () => {
+    setValue('')
   }
 
   return (
@@ -47,7 +53,9 @@ export const Calculator = () => {
           <button key={operation} onClick={() => handleClick(operation)}>{operation}</button>
         ))}
 
-        <button onClick={() => handelEvaluate()}>{equalSign}</button>
+        <button onClick={handelEvaluate}>{equalSign}</button>
+
+        <button onClick={handleClear}>{clearButton}</button>
       </div>
     </section>
   )

@@ -50,6 +50,12 @@ describe('Calculator', () => {
     screen.getByText('=')
   })
 
+  it('should render a button to reset operations', () => {
+    render(<Calculator />)
+
+    screen.getByText('C')
+  })
+
   it('should render an input', () => {
     render(<Calculator />)
 
@@ -141,5 +147,15 @@ describe('Calculator', () => {
 
     const input = screen.getByRole('textbox')
     expect(input.value).toBe('4')
+  })
+
+  it('should reset calculation after clicking the clear button', () => {
+    render(<Calculator />)
+
+    const clearButton = screen.getByText('C')
+    fireEvent.click(clearButton)
+
+    const input = screen.getByRole('textbox')
+    expect(input.value).toBe('')
   })
 })
