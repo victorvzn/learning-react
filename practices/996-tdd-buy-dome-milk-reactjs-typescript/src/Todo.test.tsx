@@ -1,13 +1,28 @@
 import { describe, expect, it } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { useState } from 'react'
 
 function Todo ({ items }) {
+  const [todo, setTodo] = useState('')
+  const [todos, setTodos] = useState(items)
+
+  const handleChange = (e) => {
+    setTodo(e.target.value)
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setTodos([...todos, { id: '', text: e.target.value }])
+    }
+  }
+
   return (
-    <>
-      {items.map(item => (
+    <div>
+      <input type='text' data-testid='input' value={todo} onChange={handleChange} onKeyDown={handleKeyDown} />
+      {todos.map(item => (
         <div key={item.id}>{item.text}</div>
       ))}
-    </>
+    </div>
   )
 }
 
@@ -43,5 +58,16 @@ describe('Buy some mil app', () => {
     render(<Todo items={items} />)
 
     screen.getByText('buy some apples')
+  })
+
+  it('add new item to the list', async () => {
+    render(<Todo items={[]} />)
+
+    const input = await screen.findByTestId('input')
+
+    fireEvent.change(input, { target: { value: 'buy some oranges' } })
+    fireEvent.keyDown(input, { key: 'Enter', code: 'Enter', charCode: 13 })
+
+    screen.getByText('buy some oranges')
   })
 })
