@@ -149,22 +149,32 @@ importers:
 
   practices/996-tdd-buy-dome-milk-reactjs-typescript:
     specifiers:
+      '@testing-library/react': 14.0.0
+      '@testing-library/user-event': 14.4.3
       '@types/react': ^18.0.27
       '@types/react-dom': ^18.0.10
       '@vitejs/plugin-react-swc': ^3.0.0
+      happy-dom: 8.7.2
       react: ^18.2.0
       react-dom: ^18.2.0
+      standard: 17.0.0
       typescript: ^4.9.3
       vite: ^4.1.0
+      vitest: 0.28.5
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
+      '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
+      '@testing-library/user-event': 14.4.3
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
       '@vitejs/plugin-react-swc': 3.2.0_vite@4.1.4
+      happy-dom: 8.7.2
+      standard: 17.0.0
       typescript: 4.9.3
       vite: 4.1.4
+      vitest: 0.28.5_happy-dom@8.7.2
 
   practices/997-aprende-tdd:
     specifiers:
@@ -1089,6 +1099,13 @@ packages:
       '@types/react-dom': 18.0.11
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: true
+
+  /@testing-library/user-event/14.4.3:
+    resolution: {integrity: sha512-kCUc5MEwaEMakkO5x7aoD+DLi02ehmEM2QCGWvNqAS1dV/fAvORWEjnjsEIvml59M7Y5kCkWN6fCCyPOe8OL6Q==}
+    engines: {node: '>=12', npm: '>=6'}
+    peerDependencies:
+      '@testing-library/dom': '>=7.21.4'
     dev: true
 
   /@tokenizer/token/0.3.0:
