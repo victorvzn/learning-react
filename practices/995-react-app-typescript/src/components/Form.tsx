@@ -2,6 +2,13 @@ import { useState } from "react"
 
 import { Sub } from '../types'
 
+const INITIAL_STATE = {
+  nick: '',
+  subMonths: 0,
+  avatar: '',
+  description: ''
+}
+
 interface FormState {
   inputValues: Sub
 }
@@ -11,12 +18,7 @@ interface FormProps {
 }
 
 const Form = ({ onNewSub }: FormProps) => {
-  const [inputValues, setInputValues] = useState<FormState['inputValues']>({
-    nick: '',
-    subMonths: 0,
-    avatar: '',
-    description: ''
-  })
+  const [inputValues, setInputValues] = useState<FormState['inputValues']>(INITIAL_STATE)
 
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -29,6 +31,11 @@ const Form = ({ onNewSub }: FormProps) => {
   const handleSubmit = (evt: React.ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault()
     onNewSub(inputValues)
+    setInputValues(INITIAL_STATE)
+  }
+
+  const handleClear = () => {
+    setInputValues(INITIAL_STATE)
   }
 
   return (
@@ -61,7 +68,13 @@ const Form = ({ onNewSub }: FormProps) => {
           value={inputValues.description}
           onChange={handleChange}
         />
-        <button>Save new sub!</button>
+        <button
+          type="button"
+          onClick={handleClear}
+        >
+          Clear the form
+        </button>
+        <button type="submit">Save new sub!</button>
       </form>
     </div>
   )
