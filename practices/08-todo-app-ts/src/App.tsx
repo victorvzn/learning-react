@@ -1,4 +1,4 @@
-const App = () => {
+const App = (): JSX.Element => {
   return (
     <h1>TODO MVC</h1>
   )
