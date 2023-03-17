@@ -11,7 +11,10 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
+    project: './tsconfig.json',
+    // Parsing error: Cannot read file '.../tsconfig.json'.eslint: --> https://stackoverflow.com/a/64940811
+    tsconfigRootDir: __dirname
   },
   plugins: [
     'react'
