@@ -6,7 +6,7 @@ TodoMVC CSS: https://github.com/tastejs/todomvc-app-css
 Requerimientos:
 
 - [x] Inicializar proyecto con Vite
-- [ ] Añadir linter para Typescript + React
+- [x] Añadir linter para Typescript + React
 - [ ] Añadir estilos del TodoMVC
 - [ ] Listar todos los TODOs
 - [ ] Poder borrar un TODO
@@ -21,3 +21,10 @@ Requerimientos:
 - [ ] Pasar a Reducer
 - [ ] Sincronizar con el backend
 
+### Comando usados:
+
+```
+npx eslint --init
+
+npm install todomvc-app-css
+```
