@@ -34,7 +34,7 @@ function Todo ({ items }) {
   )
 }
 
-describe('Buy some mil app', () => {
+describe('Buy some milk app', () => {
   it('renders an item', () => {
     const items = [{ id: 'item-1', text: 'buy some milk' }]
 
