@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { Todos } from './Todos'
+
 const mockTodos = [
   {
     id: '1',
