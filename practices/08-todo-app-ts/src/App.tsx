@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 const mockTodos = [
   {
     id: '1',
@@ -16,9 +18,11 @@ const mockTodos = [
   }
 ]
 
-const App = (): JSX.Element => {
+const App: React.FC = () => {
+  const [todos] = useState(mockTodos)
+
   return (
-    <h1>TODO MVC</h1>
+    <Todos todos={todos} />
   )
 }
 
