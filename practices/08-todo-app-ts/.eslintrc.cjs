@@ -20,6 +20,8 @@ module.exports = {
     'react'
   ],
   rules: {
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    // Solo lo añado como referencia con su valor por defecto
+    '@typescript-eslint/explicit-function-return-type': 'error'
   }
 }
