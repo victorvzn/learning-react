@@ -161,11 +161,13 @@ importers:
       eslint-plugin-react: ^7.32.2
       react: ^18.2.0
       react-dom: ^18.2.0
+      todomvc-app-css: 2.4.2
       typescript: ^4.9.3
       vite: ^4.2.0
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      todomvc-app-css: 2.4.2
     devDependencies:
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
@@ -4641,6 +4643,10 @@ packages:
     dependencies:
       is-number: 7.0.0
     dev: true
+
+  /todomvc-app-css/2.4.2:
+    resolution: {integrity: sha512-ViAkQ7ed89rmhFIGRsT36njN+97z8+s3XsJnB8E2IKOq+/SLD/6PtSvmTtiwUcVk39qPcjAc/OyeDys4LoJUVg==}
+    dev: false
 
   /token-types/5.0.1:
     resolution: {integrity: sha512-Y2fmSnZjQdDb9W4w4r1tswlMHylzWIeOKpx0aZH9BgGtACHhrk3OkT52AzwcuqTRBZtvvnTjDBh8eynMulu8Vg==}
