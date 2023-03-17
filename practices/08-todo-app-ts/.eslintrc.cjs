@@ -20,6 +20,7 @@ module.exports = {
     'react'
   ],
   rules: {
+    'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     // Solo lo añado como referencia con su valor por defecto
     '@typescript-eslint/explicit-function-return-type': 'error'
