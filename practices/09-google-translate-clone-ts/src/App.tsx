@@ -7,6 +7,7 @@ import { HiArrowsRightLeftIcon } from './components/Icons'
 import { useStore } from './hooks/useStore'
 import { AUTO_LANGUAGE } from './constants'
 import { LanguageSelector } from './components/LanguageSelector'
+import { SectionType } from './types'
 
 function App () {
   const { fromLanguage, toLanguage, interchangeLanguages, setFromLanguage, setToLanguage } = useStore()
@@ -18,7 +19,7 @@ function App () {
       <Row>
         <Col>
           <LanguageSelector
-            type='from'
+            type={SectionType.from}
             value={fromLanguage}
             onChange={setFromLanguage}
           />
@@ -37,7 +38,7 @@ function App () {
 
         <Col>
           <LanguageSelector
-            type='to'
+            type={SectionType.to}
             value={toLanguage}
             onChange={setToLanguage}
           />

@@ -17,6 +17,8 @@ function reducer (state: State, action: Action) {
   const { type } = action
 
   if (type === 'INTERCHANGE_LANGUAGE') {
+    // Lógica del estado dentro del reducer
+    // porque lo evitamos en los componentes
     if (state.fromLanguage === AUTO_LANGUAGE) return state
 
     return {
