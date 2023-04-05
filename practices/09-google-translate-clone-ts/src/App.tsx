@@ -4,10 +4,10 @@ import './App.css'
 import { useEffect } from 'react'
 import { Container, Row, Col, Button, Stack } from 'react-bootstrap'
 
-import { ClipboardIcon, HiArrowsRightLeftIcon } from './components/Icons'
+import { ClipboardIcon, HiArrowsRightLeftIcon, SpeakerIcon } from './components/Icons'
 
 import { useStore } from './hooks/useStore'
-import { AUTO_LANGUAGE } from './constants'
+import { AUTO_LANGUAGE, VOICE_FOR_LANGUAGE } from './constants'
 import { LanguageSelector } from './components/LanguageSelector'
 import { SectionType } from './types.d'
 import { TextArea } from './components/TextArea'
@@ -42,6 +42,13 @@ function App () {
 
   const handleClipboard = () => {
     navigator.clipboard.writeText(result).catch(() => {})
+  }
+
+  const handleSpeak = () => {
+    const utterance = new SpeechSynthesisUtterance(result)
+    utterance.lang = VOICE_FOR_LANGUAGE[toLanguage]
+    utterance.rate = 0.9
+    speechSynthesis.speak(utterance)
   }
 
   return (
@@ -96,6 +103,12 @@ function App () {
                   onClick={handleClipboard}
                 >
                   <ClipboardIcon />
+                </Button>
+                <Button
+                  variant='link'
+                  onClick={handleSpeak}
+                >
+                  <SpeakerIcon />
                 </Button>
               </div>
             </div>
