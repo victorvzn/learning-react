@@ -5,6 +5,8 @@ import userEvent from '@testing-library/user-event'
 
 import App from './App'
 
+// TODO: Usar mock para que este test pase
+
 test('My App works as expected', async () => {
   const user = userEvent.setup()
 
