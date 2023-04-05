@@ -21,10 +21,14 @@ function reducer (state: State, action: Action) {
     // porque lo evitamos en los componentes
     if (state.fromLanguage === AUTO_LANGUAGE) return state
 
+    const loading = state.fromText !== ''
+
     return {
       ...state,
       fromLanguage: state.toLanguage,
-      toLanguage: state.fromLanguage
+      toLanguage: state.fromLanguage,
+      result: '',
+      loading
     }
   }
 
