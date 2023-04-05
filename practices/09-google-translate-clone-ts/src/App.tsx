@@ -61,11 +61,21 @@ function reducer (state: State, action: Action) {
 
 function App () {
   // 3. Usar el hook useReducer
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [{
+    fromLanguage
+  }, dispatch] = useReducer(reducer, initialState)
+
+  console.log({ fromLanguage })
 
   return (
     <div className='App'>
       <h1>Google translate</h1>
+
+      <button onClick={() => { dispatch({ type: 'SET_FROM_LANGUAGE', payload: 'es' }) }}>
+        Cambiar a español
+      </button>
+
+      {fromLanguage}
     </div>
   )
 }
