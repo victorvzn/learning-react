@@ -22,6 +22,7 @@ function App () {
 
         <Col>
           <Button
+            disabled={fromLanguage === AUTO_LANGUAGE}
             onClick={interchangeLanguages}
           >
             <HiArrowsRightLeftIcon />
