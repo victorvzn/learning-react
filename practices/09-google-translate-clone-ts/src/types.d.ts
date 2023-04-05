@@ -22,6 +22,6 @@ export type Action =
   | { type: 'SET_RESULT', payload: string }
 
 export enum SectionType {
-  from = 'from',
-  to = 'to',
+  From = 'from',
+  To = 'to',
 }
