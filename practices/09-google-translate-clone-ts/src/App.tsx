@@ -12,6 +12,7 @@ import { SectionType } from './types.d'
 import { TextArea } from './components/TextArea'
 
 import { translate } from './services/translate'
+import { useDebounce } from './hooks/useDebounce'
 
 function App () {
   const {
@@ -27,14 +28,16 @@ function App () {
     setResult
   } = useStore()
 
+  const debouncedFromText = useDebounce(fromText, 300)
+
   useEffect(() => {
-    translate({ fromLanguage, toLanguage, text: fromText })
+    translate({ fromLanguage, toLanguage, text: debouncedFromText })
       .then(result => {
         if (result == null) return
         setResult(result)
       })
       .catch(() => { setResult('Error') })
-  }, [fromText, fromLanguage, toLanguage])
+  }, [debouncedFromText, fromLanguage, toLanguage])
 
   return (
     <Container fluid>
