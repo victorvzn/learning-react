@@ -1,21 +1,39 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
+import { Container, Row, Col, Button } from 'react-bootstrap'
+import { HiArrowsRightLeftIcon } from './components/Icons'
+
 import { useStore } from './hooks/useStore'
+import { AUTO_LANGUAGE } from './constants'
 
 function App () {
-  const { fromLanguage, setFromLanguage } = useStore()
+  const { fromLanguage, toLanguage, interchangeLanguages } = useStore()
 
   return (
-    <div className='App'>
+    <Container fluid>
       <h1>Google translate</h1>
 
-      <button onClick={() => { setFromLanguage('es') }}>
-        Cambiar a español
-      </button>
+      <Row>
+        <Col>
+          <h2>From</h2>
+          {fromLanguage}
+        </Col>
 
-      {fromLanguage}
-    </div>
+        <Col>
+          <Button
+            onClick={interchangeLanguages}
+          >
+            <HiArrowsRightLeftIcon />
+          </Button>
+        </Col>
+
+        <Col>
+          <h2>To</h2>
+          {toLanguage}
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
