@@ -22,6 +22,7 @@ function App () {
 
         <Col>
           <Button
+            variant='link'
             disabled={fromLanguage === AUTO_LANGUAGE}
             onClick={interchangeLanguages}
           >
