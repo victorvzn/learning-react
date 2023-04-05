@@ -6,8 +6,8 @@ export type AutoLanguage = typeof AUTO_LANGUAGE
 export type FromLanguage = Language | AutoLanguage
 
 export interface State {
-  fromLanguage: string
-  toLanguage: string
+  fromLanguage: FromLanguage
+  toLanguage: Language
   fromText: string
   result: string
   loading: boolean
@@ -15,8 +15,8 @@ export interface State {
 
 // TODO: Usar enum para que los tipos sean enums
 export type Action =
-  | { type: 'INTERCHANGE_LANGUAGES' }
-  | { type: 'SET_FROM_LANGUAGE', payload: string }
-  | { type: 'SET_TO_LANGUAGE', payload: string }
+  | { type: 'INTERCHANGE_LANGUAGE' }
+  | { type: 'SET_FROM_LANGUAGE', payload: FromLanguage }
+  | { type: 'SET_TO_LANGUAGE', payload: Language }
   | { type: 'SET_FROM_TEXT', payload: string }
   | { type: 'SET_RESULT', payload: string }

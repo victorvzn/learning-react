@@ -16,7 +16,7 @@ export const initialState: State = {
 function reducer (state: State, action: Action) {
   const { type } = action
 
-  if (type === 'INTERCHANGE_LANGUAGES') {
+  if (type === 'INTERCHANGE_LANGUAGE') {
     if (state.fromLanguage === AUTO_LANGUAGE) return state
 
     return {
@@ -75,7 +75,7 @@ export function useStore () {
   // NOTE: No devolver dispatch directamente para que no lo sepa el resto de componentes
 
   const interchangeLanguages = () => {
-    dispatch({ type: 'INTERCHANGE_LANGUAGES' })
+    dispatch({ type: 'INTERCHANGE_LANGUAGE' })
   }
 
   const setFromLanguage = (payload: FromLanguage) => {
