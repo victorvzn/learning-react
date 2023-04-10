@@ -48,7 +48,8 @@ export const usersSlice = createSlice({
 		addNewUser: (state, action: PayloadAction<User>) => {
 			const id = crypto.randomUUID();
 
-			return [...state, { id, ...action.payload }];
+			state.push({ id, ...action.payload })
+			// return [...state, { id, ...action.payload }];
 		},
 		deleteUserById: (state, action: PayloadAction<UserId>) => {
 			const id = action.payload;
@@ -59,7 +60,8 @@ export const usersSlice = createSlice({
 			const isUserAlreadyDefined = state.some(user => user.id === action.payload.id)
 
 			if (!isUserAlreadyDefined) {
-				return [...state, action.payload]
+				state.push(action.payload)
+				// return [...state, action.payload]
 			}
 		}
 	},
