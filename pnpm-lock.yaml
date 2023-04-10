@@ -329,9 +329,18 @@ importers:
       '@vitejs/plugin-react-swc':
         specifier: ^3.0.0
         version: 3.2.0(vite@4.2.0)
+      autoprefixer:
+        specifier: 10.4.7
+        version: 10.4.7(postcss@8.4.14)
+      postcss:
+        specifier: 8.4.14
+        version: 8.4.14
       rome:
         specifier: ^12.0.0
         version: 12.0.0
+      tailwindcss:
+        specifier: 3.1.5
+        version: 3.1.5(postcss@8.4.14)
       typescript:
         specifier: ^4.9.3
         version: 4.9.3
