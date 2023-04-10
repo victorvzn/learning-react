@@ -12,33 +12,11 @@ import {
 
 import { HiPencilSquare, HiTrash } from "./Icons";
 
-const users: {
-	id: string;
-	name: string;
-	email: String;
-	github: string;
-}[] = [
-	{
-		id: "1",
-		name: "Pat Allen",
-		email: "pat.allen@gexample.com",
-		github: "pat.allen",
-	},
-	{
-		id: "2",
-		name: "Evelyn Little",
-		email: "evelyn.little@gexample.com",
-		github: "evelyn.little",
-	},
-	{
-		id: "3",
-		name: "Victor Villazon",
-		email: "victor.villazon@gmail.com",
-		github: "victorvzn",
-	},
-];
+import { useSelector } from "react-redux";
 
 export default function ListOfUsers() {
+  const users = useSelector(state => state.users)
+  
 	return (
 		<Card>
 			<Title>
