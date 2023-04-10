@@ -1,13 +1,13 @@
 import {
-	Badge,
-	Card,
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeaderCell,
-	TableRow,
-	Title,
+  Badge,
+  Card,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeaderCell,
+  TableRow,
+  Title,
 } from "@tremor/react";
 
 import { HiPencilSquare, HiTrash } from "./Icons";
@@ -73,7 +73,7 @@ export default function ListOfUsers() {
 								{item.name}
 							</TableCell>
 							<TableCell>{item.email}</TableCell>
-							<TableCell>
+							<TableCell style={{ display: "flex", gap: "3px" }}>
 								<button type="button">
 									<HiPencilSquare />
 								</button>
