@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { Title } from "@tremor/react";
 import "./App.css";
+import { CreateNewUser } from "./components/CreateNewUser";
 import ListOfUsers from "./components/ListOfUsers";
 
 function App() {
-	const [count, setCount] = useState(0);
-
 	return (
 		<>
-			<h1 className="mb-2">
+			<Title className="mb-2">
 				Proyecto con Redux + Rome linter + Tremor components + Typescript
-			</h1>
+			</Title>
 
 			<ListOfUsers />
+
+			<CreateNewUser />
 		</>
 	);
 }
