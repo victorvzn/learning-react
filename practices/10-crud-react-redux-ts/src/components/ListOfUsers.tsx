@@ -1,13 +1,13 @@
 import {
-  Badge,
-  Card,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-  Title,
+	Badge,
+	Card,
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeaderCell,
+	TableRow,
+	Title,
 } from "@tremor/react";
 
 import { HiPencilSquare, HiTrash } from "./Icons";
@@ -16,8 +16,8 @@ import { useAppSelector } from "../hooks/store";
 import { useUserActions } from "../hooks/useUserActions";
 
 export default function ListOfUsers() {
-  const users = useAppSelector(state => state.users)
-  const { removeUser } = useUserActions()
+	const users = useAppSelector((state) => state.users);
+	const { removeUser } = useUserActions();
 
 	return (
 		<Card>
@@ -57,10 +57,7 @@ export default function ListOfUsers() {
 								<button type="button">
 									<HiPencilSquare />
 								</button>
-								<button
-                  type="button"
-                  onClick={() => removeUser(item.id)}
-                >
+								<button type="button" onClick={() => removeUser(item.id)}>
 									<HiTrash />
 								</button>
 							</TableCell>
