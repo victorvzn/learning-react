@@ -12,11 +12,13 @@ import {
 
 import { HiPencilSquare, HiTrash } from "./Icons";
 
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../hooks/store";
+import { useUserActions } from "../hooks/useUserActions";
 
 export default function ListOfUsers() {
-  const users = useSelector(state => state.users)
-  
+  const users = useAppSelector(state => state.users)
+  const { removeUser } = useUserActions()
+
 	return (
 		<Card>
 			<Title>
@@ -55,7 +57,10 @@ export default function ListOfUsers() {
 								<button type="button">
 									<HiPencilSquare />
 								</button>
-								<button type="button">
+								<button
+                  type="button"
+                  onClick={() => removeUser(item.id)}
+                >
 									<HiTrash />
 								</button>
 							</TableCell>
