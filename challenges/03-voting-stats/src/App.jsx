@@ -1,12 +1,14 @@
 import './App.css'
 import { useEffect, useState } from 'react'
 
+const INITIAL_STATE = {
+  young: { counter: 0, total: 0 },
+  mid: { counter: 0, total: 0 },
+  old: { counter: 0, total: 0 }
+}
+
 export default function App () {
-  const [results, setResults] = useState({
-    young: { counter: 0, total: 0 },
-    mid: { counter: 0, total: 0 },
-    old: { counter: 0, total: 0 }
-  })
+  const [results, setResults] = useState(INITIAL_STATE)
 
   // young: 18-25, mid: 26-35, old: 36-55
   const voters = [
@@ -24,39 +26,43 @@ export default function App () {
     { name: 'Zack', age: 19, voted: false }
   ]
 
+  const getVoterType = ({ age }) => {
+    if (age >= 18 && age <= 25) return 'young'
+    if (age >= 26 && age <= 35) return 'mid'
+    if (age >= 36 && age <= 55) return 'old'
+  }
+
+  const hasVoted = ({ voted }) => voted
+
   useEffect(() => {
-    const resultWithType = voters.map((voter) => {
-      if (voter.age >= 18 && voter.age <= 25) {
-        return { ...voter, type: 'young' }
-      }
-      if (voter.age >= 26 && voter.age <= 35) {
-        return { ...voter, type: 'mid' }
-      }
-      if (voter.age >= 36 && voter.age <= 55) {
-        return { ...voter, type: 'old' }
-      }
-    })
+    for (const voter of voters) {
+      const type = getVoterType(voter)
+      const hasVote = hasVoted(voter)
 
-    const result = {
-      young: { counter: 0, total: 0 },
-      mid: { counter: 0, total: 0 },
-      old: { counter: 0, total: 0 }
-    }
+      // if (hasVote) {
+      //   console.log({ name: voter.name, type, hasVote })
+      // }
 
-    for (const voter of resultWithType) {
-      if (result[voter.type]) {
-        result[voter.type].total += 1
-      }
-      if (result[voter.type] && voter.voted) {
-        result[voter.type].counter = result[voter.type].counter + 1
-      }
+      setResults(prev => {
+        const clonePrev = structuredClone(prev)
+
+        clonePrev[type].total += 1
+
+        if (hasVote) {
+          clonePrev[type].counter += 1
+        }
+
+        return { ...prev, ...clonePrev }
+      })
     }
-    setResults(result)
   }, [])
 
   return (
     <div className='App'>
       <h1>Voting Stats</h1>
+
+      {JSON.stringify(results)}
+
       <p>
         Young: {results.young.counter} / {results.young.total}
       </p>
