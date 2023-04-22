@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { type User } from './types'
 import { UsersList } from './components/UsersList'
@@ -7,6 +7,10 @@ function App () {
   const [users, setUsers] = useState<User[]>([])
   const [showColors, setShowColors] = useState(false)
   const [sortByCountry, setSortByCountry] = useState(false)
+
+  const originalUsers = useRef<User[]>([])
+  // useRef -> para guardar un valor que queremos que se comparta entre renderizados
+  // pero que al cambiar, no vuelva a renderizar el componente
 
   const toggleColors = () => {
     setShowColors(!showColors)
@@ -31,10 +35,17 @@ function App () {
     setUsers(filteredUsers)
   }
 
+  const handleReset = () => {
+    setUsers(originalUsers.current)
+  }
+
   useEffect(() => {
     fetch('https://randomuser.me/api/?results=100')
       .then(async res => await res.json())
-      .then(data => { setUsers(data.results) })
+      .then(data => {
+        setUsers(data.results)
+        originalUsers.current = data.results
+      })
       .catch(err => { console.log(err) })
   }, [])
   return (
@@ -46,7 +57,7 @@ function App () {
         <button onClick={toggleSortByCountry}>
           {sortByCountry ? 'No ordenar por país' : 'Ordenar por país'}
         </button>
-        <button onClick={toggleSortByCountry}>Restaurar estado inicial</button>
+        <button onClick={handleReset}>Restaurar estado inicial</button>
       </header>
 
       <main>
