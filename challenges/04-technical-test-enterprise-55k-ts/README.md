@@ -8,7 +8,7 @@ Here are the steps to follow:
 - [x] Fetch 100 rows of data using the API.
 - [x] Display the data in a table format similar to the example.
 - [x] Provide the option to color rows as shown in the example.
-- [ ] Allow the data to be sorteed by country as demostrated in the example.
+- [x] Allow the data to be sorteed by country as demostrated in the example.
 - [ ] Enable the ability to delete a row as shown in the example.
 - [ ] Implement a feature that allows the user to restore the initial state, meaning that all deleted rows will be recovered.
 - [ ] Handle any potential errors that may occur.

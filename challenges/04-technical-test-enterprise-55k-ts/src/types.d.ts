@@ -1,3 +1,10 @@
+// Tenemos que extender el prototipo de array en los tipos
+declare global {
+  interface Array<T> {
+    toSorted(compareFn?: (a: T, b: T) => number): T[]
+  }
+}
+
 export interface APIResults {
   results: User[]
   info: Info
