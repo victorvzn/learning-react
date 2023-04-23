@@ -7,6 +7,7 @@ function App () {
   const [users, setUsers] = useState<User[]>([])
   const [showColors, setShowColors] = useState(false)
   const [sortByCountry, setSortByCountry] = useState(false)
+  const [filterCountry, setfilterCountry] = useState<string | null>(null)
 
   const originalUsers = useRef<User[]>([])
   // useRef -> para guardar un valor que queremos que se comparta entre renderizados
@@ -20,15 +21,21 @@ function App () {
     setSortByCountry(prevState => !prevState)
   }
 
+  const filteredUsers = filterCountry !== null && filterCountry.length > 0
+    ? users.filter(user => {
+      return user.location.country.toLocaleLowerCase().includes(filterCountry.toLocaleLowerCase())
+    })
+    : users
+
   const sortedUsers = sortByCountry
     // El sort muta el arreglo original (ESTA MAL)
     // Solución 1: [...users].sort(...) (REGULAR)
     // Solución 2: StructuredClone(users).sort(...) REGULAR
     // Solución 3: users.toSorted(...) OK, pero aun no soportado, pero hay solución extendiendo el prototipo de array en los tipos
-    ? users.toSorted((a, b) => {
+    ? filteredUsers.toSorted((a, b) => {
       return a.location.country.localeCompare(b.location.country)
     })
-    : users
+    : filteredUsers
 
   const handleDelete = (email: string) => {
     const filteredUsers = users.filter((user) => user.email !== email)
@@ -54,10 +61,14 @@ function App () {
 
       <header>
         <button onClick={toggleColors}>Colorea filas</button>
+
         <button onClick={toggleSortByCountry}>
           {sortByCountry ? 'No ordenar por país' : 'Ordenar por país'}
         </button>
+
         <button onClick={handleReset}>Restaurar estado inicial</button>
+
+        <input placeholder='Filtra por país' onChange={(e) => { setfilterCountry(e.target.value) }} />
       </header>
 
       <main>
