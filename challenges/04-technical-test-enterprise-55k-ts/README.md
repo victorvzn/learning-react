@@ -14,7 +14,7 @@ Here are the steps to follow:
 - [x] Handle any potential errors that may occur.
 - [x] Implement a feature that allows the user to filter the data by country.
 - [x] Avoid sorting users again the data when the user is changing filter by country.
-- [ ] Sort by clicking on the column header.
-- [ ] Provide a README.md file with instructions on how to run the application.
+- [x] Sort by clicking on the column header.
+- [x] Provide a README.md file with instructions on how to run the application.
 
 * Source: https://www.twitch.tv/videos/1792623213 (https://midu.dev/)
