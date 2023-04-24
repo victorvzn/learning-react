@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import { type User } from './types'
 import { UsersList } from './components/UsersList'
@@ -21,21 +21,45 @@ function App () {
     setSortByCountry(prevState => !prevState)
   }
 
-  const filteredUsers = filterCountry !== null && filterCountry.length > 0
-    ? users.filter(user => {
-      return user.location.country.toLocaleLowerCase().includes(filterCountry.toLocaleLowerCase())
-    })
-    : users
+  const filteredUsers = useMemo(() => {
+    console.log('calculate filteredUsers')
+    return filterCountry !== null && filterCountry.length > 0
+      ? users.filter(user => {
+        return user.location.country.toLocaleLowerCase().includes(filterCountry.toLocaleLowerCase())
+      })
+      : users
+  }, [users, filterCountry])
 
-  const sortedUsers = sortByCountry
+  const sortedUsers = useMemo(() => {
+    console.log('calculate sortedUsers')
     // El sort muta el arreglo original (ESTA MAL)
     // Solución 1: [...users].sort(...) (REGULAR)
     // Solución 2: StructuredClone(users).sort(...) REGULAR
     // Solución 3: users.toSorted(...) OK, pero aun no soportado, pero hay solución extendiendo el prototipo de array en los tipos
-    ? filteredUsers.toSorted((a, b) => {
-      return a.location.country.localeCompare(b.location.country)
-    })
-    : filteredUsers
+    return sortByCountry
+      ? filteredUsers.toSorted(
+        (a, b) => a.location.country.localeCompare(b.location.country)
+      )
+      : filteredUsers
+  }, [filteredUsers, sortByCountry])
+
+  // const filteredUsers = (() => {
+  //   console.log('calculate filteredUsers')
+  //   return filterCountry !== null && filterCountry.length > 0
+  //     ? users.filter(user => {
+  //       return user.location.country.toLocaleLowerCase().includes(filterCountry.toLocaleLowerCase())
+  //     })
+  //     : users
+  // })()
+
+  // const sortedUsers = (() => {
+  //   console.log('calculate sortedUsers')
+  //   return sortByCountry
+  //     ? filteredUsers.toSorted(
+  //       (a, b) => a.location.country.localeCompare(b.location.country)
+  //     )
+  //     : filteredUsers
+  // })()
 
   const handleDelete = (email: string) => {
     const filteredUsers = users.filter((user) => user.email !== email)
